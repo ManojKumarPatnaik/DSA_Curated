@@ -1,0 +1,38 @@
+Points to ask: 1) If the intervals will be sorted or not
+
+Optimal approach:
+1) First sort the array
+2) Take start end values as a[0][0] and a[0][1].
+3) Compare the end values to other element's first values.
+4) If end > interval[0] i.e the first value then we take the max of their end values
+5) else we add them to res.
+
+TC-O(nlogn)
+SC-O(1) 
+
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+
+class Solution{
+    public int[][] merge(int[][] intervals){
+        List<int[]> res = new ArrayList<>();
+
+        if(intervals.length ==0 || intervals == null) return res.toArray(new int[0][])
+
+        //Step1 Sorting the array based on first value
+        Arrays.sort(intervals,(a,b)-> a[0] - b[0]);
+
+        for(int[] interval: intervals){
+            //Comparing the end and start values of the range
+            if(end > interval[0]){
+                end = Math.max(end, interval[1]);
+            } else {
+                res.add(new int[]{start,end});
+                start = interval[0];
+                end = interval[1];
+            }
+        }
+        res.add(new int[]{start, end});
+        return res.toArray(new int[0][]);
+    }
+}

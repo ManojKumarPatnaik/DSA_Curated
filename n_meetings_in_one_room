@@ -1,0 +1,28 @@
+class Solution{
+    static class meeting{
+        int start;
+        int end;
+        meeting(int start, int end){
+            this.start = start;
+            this.end = end;
+        }
+    }
+    static int maxMeetings(int[] start, int[] end, int n){
+        ArrayList<meeting> meet = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            meet.add(new meeting(start[i], end[i]));
+        }
+
+        Collections.sort(meet, (a,b)->(a.end - b.end));
+
+        int count=1;
+        int prev=0;
+        for(int i=1; i<n; i++){
+            if(meet.get(i).start > meet.get(prev).end){
+                prev = i;
+                count++;
+            }
+        }
+        return count;
+    }
+}

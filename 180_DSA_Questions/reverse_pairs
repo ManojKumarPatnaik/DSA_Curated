@@ -1,0 +1,8 @@
+Brute Force Approach:
+1) Pick elements one by one and check.
+
+TC - O(N^2)
+SC - O(1)
+
+Optimal Approach:
+We use the same logic as inversion count except we add an additional condition to check twice of the value

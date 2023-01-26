@@ -1,0 +1,24 @@
+Brute Force Approach:
+Run a nested loop keep i and j and check for max profit
+
+TC - O(N^2)
+
+Optimal Approach:
+1) Take the first value of array as min value
+2) Iterate over the array and check for max profit and a value smaller than min value
+
+TC- O(N)
+SC- O(1)
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int min = prices[0];
+        int maxProfit = 0;
+        
+        for(int price: prices){
+            if(price < min) min = price;
+            maxProfit = Math.max(maxProfit, price - min);
+        }
+        return maxProfit;
+    }
+}

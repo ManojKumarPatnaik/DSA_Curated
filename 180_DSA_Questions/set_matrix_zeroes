@@ -1,0 +1,62 @@
+Brute force Approach:
+
+Points to ask in interviews: 1) what will be the range of values since we will be changing 
+the values we need to make sure we do it with out of range values.
+1)First traverse the matrix and if matrix[i][j] == 0 change all the non zero values to an put of range value ex:-1
+2)Then traverse the matrix again and change all the -1s to 0s.
+3)We don't change 0 values as it might affect other rows and cols.
+
+T.C: O(NxM) x O(N+M)
+S.C: O(1)
+
+Better Approach:
+
+1) We create two arrays row and col.
+2) We traverse the matrix and every time we encounter a 0 for that position we update the row and col values i.e if mat[i][j]==0 then row[i]=0 and col[j]=0
+3) We traverse the matrix again and check if row[i] or col[j] == 0 then we set mat[i][j]=0
+
+T.C: O(NxM + NxM) -> Since we are traversing the matrix twice
+S.C: O(N) + O(M) -> Since we are creating two extra arrays
+
+Optimal Approach:
+
+1) We will take first row as col array and first col as row array.
+2) We will take a variable col0 and mark it as true.
+We take this variable so that incase there is a 0 in the first col then it will change the entire col as 0 and the mat[0][0] will also become 0 which will change our col array.
+3) If mat[i][j] == 0, then mat[i][0] = 0 and mat[0][j] = 0
+4) If mat[i][0]==0 then we set col0 = false i.e if we encounter a 0 in first col we only set col0 as false and don't change the values.
+5) We then traverse from the back and check: 
+if mat[i][0] == 0 or mat[0][j] == 0 then mat[i][j] = 0
+6) We traverse from the back so that we don't change our row and col arrays
+7) Once we are done with everything we can update the mat[i][0] based on col0 value
+
+T.C: 2(O(NxM)) -> Since we are traversing the matrix twice
+S.C: O(N) + O(M) -> Since we are creating two extra arrays
+
+
+dummy arays = first row and first col
+class Solution {
+    public void setZeroes(int[][] mat) {
+        int rows = mat.length, cols = mat[0].length, col0=1;
+        
+        for(int i=0; i<rows; i++){
+            if(mat[i][0] == 0) col0=0; // checking if the first col has any 0s or not
+            for(int j=1; j<cols; j++){
+                if(mat[i][j] == 0){
+                    mat[i][0] = 0 //if a 0 is encountered we update our dummy arrays
+                    mat[0][j] = 0 
+                }
+            }
+        }
+
+        for(int i=rows-1; i>0; i--){
+            for(int j=cols-1; j>1; j--){
+                if(mat[0][j] || mat[i][0] == 0){
+                    mat[i][j]=0;
+                }
+            }
+            if(col0==0) mat[i][0]=0;
+        }
+
+    }
+}

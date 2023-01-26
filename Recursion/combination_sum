@@ -1,0 +1,53 @@
+/*
+Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+*/
+
+class Solution{
+     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+       List<List<Integer>> ans = new ArrayList<>();
+       findCombination(0, candidates, target, ans, new ArrayList<>());
+       return ans;
+    }
+    public void findCombination(int ind, int[] arr, int target, List<List<Integer>> ans, List<Integer> ds){
+        if(ind >= arr.length){
+            if(target == 0){
+                ans.add(ds);
+            }
+            return;
+        }
+        if(arr[ind] <= target){
+            ds.add(arr[ind]);
+            findCombination(ind, arr, target - arr[i], ans, ds);
+            ds.remove(ds.size() - 1);
+        }
+        findCombination(ind, arr, target, ans, ds);
+    }
+}
+
+//===============================================================================================//
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        findCombinations(0, candidates, target, 0 ,ans, new ArrayList<>());
+        return ans;
+    }
+    public void findCombinations(int ind, int[] arr, int target, int currSum ,List<List<Integer>> ans, List<Integer> ds){
+        if(ind >= arr.length){
+            if(currSum == target){
+                ans.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+        
+        if(currSum <= target){
+            ds.add(arr[ind]);
+            currSum += arr[ind];
+            findCombinations(ind, arr, target, currSum, ans, ds);
+            ds.remove(ds.size() - 1);
+            currSum -= arr[ind];
+        }
+        findCombinations(ind + 1, arr, target, currSum, ans, ds);
+    }
+}

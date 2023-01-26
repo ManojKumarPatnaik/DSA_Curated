@@ -1,0 +1,52 @@
+Brute Force Approach:
+1) Linear Search 
+
+TC - O(NxM)
+SC - O(1)
+
+Better Approach:
+1) Row wise Binary Search
+
+TC - O(NLogM)
+SC - O(1)
+
+Optimal Approach:
+
+If the matrix is row wise and col wise sorted
+
+1) Place the pointer at the last col of the first Row
+2) If it is == Target return true.
+3) If it is > Target do col-- (since the matrix is row wise and col wise sorted)
+4) If it is < Target do row++
+5) If the element is out of bound we return false.
+TC -
+
+If the matrix is sorted i.e if flatten it gives a sorted array we can apply binary search directly
+
+TC - O(log(N*M))
+SC - O(1)
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        
+        if(matrix.length == 0) return false;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        
+        int low = 0;
+        int high = (n*m)-1;
+
+        while(low<=high){
+            int mid = (low+high)/2;
+
+            if(matrix[mid/m][mid%m] == target) return true;
+
+            if(matrix[mid/m][mid%m] < target){
+                low = mid+1;
+            } else {
+                high = mid-1;
+            }
+        }
+        return false;
+    }
+}

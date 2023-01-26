@@ -1,0 +1,36 @@
+Brute Force Approach:
+Use an extra matrix and:
+1) Place the first row in last col and so on.
+
+TC- O(N^2)
+SC- O(N^2)
+
+Optimal Approach:
+1) First transpose the matrix
+2) Reverse all the rows of the matrix 
+
+Solution:
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        //Step 1 : Transpose the matrix
+        for(int i=0; i<matrix.length; i++){
+            for(int j=i; j<matrix[0].length; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        
+        //Step 2: Reverse All The Rows
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[0].length/2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix.length-1-j];
+                matrix[i][matrix.length-1-j] = temp;
+            }
+        }
+    }
+}
+TC - O(N^2) + O(N^2)
+SC - O(1)

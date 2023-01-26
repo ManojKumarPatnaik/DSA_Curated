@@ -1,0 +1,56 @@
+//Union
+class Solution{
+    public static int doUnion(int a[], int n, int b[], int m) 
+    {
+        //Your code here
+        HashSet <Integer> h = new HashSet<>();
+        for(int i:a){
+            h.add(i);
+        }
+        for(int i:b){
+            h.add(i);
+        }
+        return h.size();
+    }
+}
+
+//Intersection
+
+//Direct Method
+class Solution{
+    public static int doIntersection(int a[], int n, int b[], int m) 
+    {
+        //Your code here
+        HashSet <Integer> h = new HashSet<>();
+        for(int i:a){
+            h.add(i);
+        }
+        int count = 0;
+        for(int i:b){
+            if (h.contains(i)){
+                         count++;
+            h.remove(i);   
+            }
+        }
+        return count;
+    }
+}
+
+//Using Retain All
+
+class Solution{
+    public static int doUnion(int a[], int n, int b[], int m) 
+    {
+        //Your code here
+        HashSet <Integer> h1 = new HashSet<>();
+        for(int i:a){
+            h1.add(i);
+        }
+        HashSet <Integer> h2 = new HashSet<>();
+        for(int i:b){
+            h2.add(i);
+        }
+        h1.retainAll(h2);
+        return h1.size();
+    }
+}

@@ -1,0 +1,15 @@
+class HelloWorld {
+    public static void main(String[] args) {
+        String s = "madam";
+        System.out.print(isPalindrome(s,0));
+    }
+    
+    public static boolean isPalindrome(String s, int i){
+        int n = s.length();
+        if(s.charAt(i) != s.charAt(n-i-1)){
+            return false;
+        }
+        if(i >= n/2) return true;
+        return isPalindrome(s,i+1);
+    }
+}

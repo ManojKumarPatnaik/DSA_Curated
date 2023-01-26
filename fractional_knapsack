@@ -1,0 +1,31 @@
+class itemComparator implements Comparator<Item>{
+    @Override
+    public int itemComparator(Item a, Item b){
+        int r1 = (double)(a.value)/(double)(a.weight);
+        int r2 = (double)(b.value)/(double)(b.weight);
+
+        if(r1 > r2) return -1;
+        else if(r1 < r2) return 1;
+        else return 0;
+    }
+}
+class Solution{
+    double fractionalKnapSack(int W, int[] arr, int n){
+        Arrays.sort(arr, new itemComparator());
+
+        int curWeight = 0;
+        double finalWeight = 0;
+
+        for(int i=0; i < n; i++){
+            if(curWeight + arr[i].weight <= W){
+                curWeight += arr[i].weight;
+                finalWeight += arr[i].weight;
+            } else {
+                int remain = W - curWeight;
+                finalWeight += (double) (arr[i].value)/(double)(arr[i].weight)*remain;
+                break;
+            }
+        }
+        return finalWeight;
+    }
+}

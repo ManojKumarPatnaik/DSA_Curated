@@ -1,0 +1,50 @@
+Brute Force Approach
+1) Create a map of element such that
+{
+    el:count
+}
+
+then iterate over the map and return the majority element
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        
+        for(int i=0; i<nums.length; i++){
+            int count = map.getOrDefault(nums[i],0);
+            count = count+1;
+            map.put(nums[i],count);
+        }
+        
+        int max = Integer.MIN_VALUE;
+        
+        for(int el: nums){
+            if(map.get(el) > max){
+                max = el;
+            }
+        }
+        return max;
+    }
+}
+
+TC - O(NlogN);
+SC - O(N)
+
+Optimal Approach:
+Moore's Voting Algorithm
+
+We keep on increasing and decreasing count till we find the majority element, Since the element will be present more than N/2 times its count will never be 0
+
+1) we take res and count.
+2) if(count == 0) res=a[i]
+3) if(res == a[i]) count++
+   else count--
+4) return res;
+
+for(int num: nums){
+    if(count == 0) res=num;
+
+    if(res == num) count++;
+    else count--;
+}
+return res;

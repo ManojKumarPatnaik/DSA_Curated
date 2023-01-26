@@ -1,0 +1,44 @@
+Brute Force Approach:
+sort the array using Arrays.sort(nums)
+
+TC=O(nlogn)
+SC=O(1)
+
+Better Approach:
+Count the no of 0s 1s and 2s and run the loop for that many times and endter the values
+
+TC= 2(O(n))
+SC=O(1)
+
+Optimal Approach:
+
+1) We take three pointers low, mid, high.
+2) We place low and mid at the start, and high at the end.
+3) We check if a[mid] == 0 we swap(a[low],a[mid]) low++ mid++;
+4) if a[mid]==1 mid++;
+5) if a[mid]==2 we swap(a[high], a[mid]) high--;
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+        int mid = 0;
+        while(mid <= high){
+            if(nums[mid] == 0){
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+                mid++;
+                low++;
+            } else if(nums[mid] == 2){
+                int temp = nums[high];
+                nums[high] = nums[mid];
+                nums[mid] = temp;
+                high--;
+            } else mid++;
+        }
+    }
+}
+
+TC- O(N)
+SC- O(1)

@@ -1,0 +1,19 @@
+printSubsquenceWithSumK(int i, ArrayList res, int sum, int s,int[] arr, int n){
+    if(i >= n){
+        if(sum == s){
+            print(res);
+        }
+    }
+
+    //PICK
+    res.add(arr[i]);
+    s += arr[i];
+    printSubsquenceWithSumK(i+1, res, sum, s, arr, arr.length);
+    s -= arr[i];
+    res.remove(arr[i]);
+
+    //NOT PICK
+    printSubsquenceWithSumK(i+1, res, sum, s, arr, arr.length);
+
+
+}

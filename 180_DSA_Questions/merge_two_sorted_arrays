@@ -1,0 +1,42 @@
+Brute Force Approach:
+1) Take all the elements from 2nd array and store it in 1st and then sort it.
+
+TC- O(nlogn)
+SC- O(1)
+
+Optimal Approach - Two Pointer Approach
+
+The main logic here is to start filling from the largest element at the back of the array
+
+1) We will take two pointers and point it to the end of both arrays. i.e m-1 and n-1
+2) We will then compare the values and whichever is greater will be stored at the end of the array
+3) After that we will only decrement the pointer which was added and the array pointer.
+
+Solution Video: https://www.youtube.com/watch?v=C4oBXLr3zos
+
+TC - O(N)
+SC - O(1)
+
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+
+Code: 
+
+class Solution{
+    public void  merge(int[] nums1, int m, int[] nums2, int n){
+        int p1=m-1, p2=n-1, i=m+n-1;
+
+        while(p2>=0){
+            if(p1>=0 && nums1[p1] > nums2[p2]){
+                nums1[i] = nums1[p1];
+                i--;
+                p1--;
+            } else{
+                nums1[i] = nums2[p2];
+                i--;
+                p2--;
+            }
+        }
+    }
+}

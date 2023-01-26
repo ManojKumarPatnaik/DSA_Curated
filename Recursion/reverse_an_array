@@ -1,0 +1,44 @@
+class HelloWorld {
+    public static void main(String[] args) {
+        int[] b = new int[]{1,2,3,4,5};
+        int[] a = reverse(b, 0, 4); 
+        for(int i=0; i<a.length; i++){
+            System.out.print(a[i]+" ");
+        }
+    }
+    
+    public static int[] reverse(int[] arr, int left, int right){
+        if(left >= right){
+            return arr;
+        }
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+        reverse(arr, left+1, right-1);
+        return arr;
+    }
+}
+
+
+//Method #2
+class HelloWorld {
+    public static void main(String[] args) {
+        int[] b = new int[]{1,2,3,4,5};
+        int[] a = reverse(b, 0); 
+        for(int i=0; i<a.length; i++){
+            System.out.print(a[i]+" ");
+        }
+    }
+    
+    public static int[] reverse(int[] arr, int i){
+        int n = arr.length;
+        if(i >= n/2){
+            return arr;
+        }
+        int temp = arr[i];
+        arr[i] = arr[n-i-1];
+        arr[n-i-1] = temp;
+        reverse(arr, i+1);
+        return arr;
+    }
+}

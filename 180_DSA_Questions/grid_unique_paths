@@ -1,0 +1,20 @@
+Brute and Better approach:
+1) We recursively check and update the count
+
+Optimal Approach:
+1) We check how many steps we need to take towards right and bottom.
+2) We take m-1 and n-1 steps so total no.Of steps is m+n-2
+3) We then take m+n-2Cm-1 or m+n-2Cn-1 to get the number of unique paths
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int N = m+n-2;
+        int r = m-1;
+        double res = 1;
+        
+        for(int i=1; i<=r; i++){
+            res = res*(N-r+i)/i;
+        }
+        return (int)res;
+    }
+}

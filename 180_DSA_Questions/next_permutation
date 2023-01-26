@@ -1,0 +1,35 @@
+Steps:
+1) Find the decreasing sequence from the end i.e First find the index where a[i] > a[i+1]
+2) Find the number for substitution that is the next highest number after the number at a[i]
+and perform swap 
+3) Rearrange remaining array by Reversing the remaining numbers
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int i = nums.length-2;
+
+        while(i>=0 && nums[i] >= nums[i+1]) i--; //Step 1 find decreasing sequence
+
+        if(i>=0){    //If it is not entirely decreasing ex a != [3,2,1]
+           int j = nums.length-1;
+           while(nums[j] <= nums[i]) j--; // Finding the number for substitution
+           swap(nums,i,j);
+        }
+        reverse(nums,i+1); //Reversing the remaining characters
+    }
+
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public reverse(int[] nums, int start){
+        int end = nums.length-1;
+        while(start < end){
+            swap(nums,start,end);
+            start++;
+            end--;
+        }
+    }
+}

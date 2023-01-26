@@ -1,0 +1,54 @@
+public List<List<String>> solveNqueen(int n){
+    List<List<String>> res = new ArrayList<>();
+    char[][] board = new char[n][n];
+    //We first fill the board with empty values and call solve function
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            board[i][j] = ".";
+        }
+    }
+    solve(board, n, 0, res);
+    return res;
+}
+
+public boolean solve(char[][] board, int n, int col, List<List<String>> res){
+    if(col == n){ // if we reached the last col we add the row to res
+        List<String> list = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            list.add(String.valueOf(board[i]))
+        }
+        res.add(list);
+        return false;  //backtracking
+    }
+    //We iterate over the row and check if it safe to place the queen or not
+    for(int i=0; i<n; i++){
+        if(isSafe(board,n,i,col)){
+            board[i][col] = "Q";
+            if(solve(board, n, col+1, res)) return true; 
+            else board[i][col] = "."; //backtracking -> once it returns from recursion if it is false we have to remove the queen that was added in that row
+        }
+    }
+    return false;
+}
+
+public boolean isSafe(char[][] board, int n, int row, int col){
+    //first we iterate over the row and col to check if it safe
+    for(int i=0; i<n; i++){
+        if(board[row][i] != ".") return false;
+        if(board[i][col] != ".") return false; 
+    }
+
+    int step=1;
+    //checking diagonally upper left
+    while(row - step >= 0 && col - step >= 0){
+        if(board[row-step][col-step++] != ".") return false;
+    }
+
+    step = 1;
+    //checking diagonally upper right
+    while(row - step >= 0 && col + step >= 0){
+        if(board[row-step][col+step++] != ".") return false;
+    }
+
+    return true;
+}

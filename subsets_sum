@@ -1,0 +1,26 @@
+There are two conditions:
+1) You pick an element in the subset.
+2) You don't pick an element in the subset.
+When you pick an element we add it to the sum else we don't add it. 
+
+class Solution{
+    void subsetSum(int ind, int sum, ArrayList<Integer> arr, int N, ArrayList<Integer> sum){
+        if(ind == N){
+            sum.add(sum);
+            return;
+        }
+
+        //We Pick the element
+        subsetSum(ind+1, sum+arr.get(ind), arr, N, sum);
+
+        //We Don't Pick the element
+        subsetSum(ind+1, sum, arr, N, sum);
+    }
+
+    public List<Integer> func(ArrayList<Integer> arr, int N){
+        ArrayList<Integer> res = new ArrayList<>();
+        subsetSum(0,0,arr,N,res);
+        Collections.sort(res);
+        return res;
+    }
+}

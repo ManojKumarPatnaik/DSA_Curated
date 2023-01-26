@@ -1,0 +1,14 @@
+printAllTheSubsequence(int i, ArrayList[] res, int[] arr, int n){
+    if(i >= n){
+        for(el:res){
+            System.out.println(el);
+        }
+        if(res.size == 0) System.out.println("[]")
+        return;
+    }
+    //Pick or Not Pick
+    res.add(arr[i]); //===============> Pick Element
+    printAllTheSubsequence(i+1, res,arr,arr.length);
+    res.remove(arr[i]); //===============> Not Pick Element
+    printAllTheSubsequence(i+1, res,arr, arr.length);
+}

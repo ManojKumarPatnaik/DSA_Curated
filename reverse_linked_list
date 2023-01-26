@@ -1,0 +1,15 @@
+//1->2->3->4->5, newHead=null
+
+class Solution {
+    public ListNode reverList(ListNode head){
+        ListNode newHead = null;
+
+        while(head != null){
+            ListNode next = head.next //storing heads next value in a temp node; next = 1;next 3
+            head.next = newHead   //Updating heads next value with the newHead value; 1->null; 2->1
+            newHead = head;     //Updating newHead's value to previous head; newHead=1 ; newHead = 2
+            head = next;        //Updating head's value to next head; head =2; head = 3
+        }
+        return newHead;
+    }
+}

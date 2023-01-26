@@ -1,0 +1,6 @@
+public static void printNumbers(int count){
+	    if(count > 0){
+	        System.out.println(count);
+    	    printNumbers(count-1);
+	    }
+	}

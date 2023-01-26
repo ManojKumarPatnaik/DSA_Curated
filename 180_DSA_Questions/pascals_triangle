@@ -1,0 +1,16 @@
+1) Always the first and last value for a row will be 1
+2) For nth row pascal triangle will have n cols
+nth row will always be r-1Cc-1(r = rowth no, c=colth no)
+
+Solution
+1) We first take a List<List<Integer>> res
+2) We then take List<Integer> row, and pre.
+3) We traverse from 0 to numRows.
+4) We then check for first and last value:
+if(j==0 || j==i){
+    row.add(1);
+} else {
+    row.add(pre.get(j) + pre.get(j-1));
+}
+pre=row
+res.add(row)

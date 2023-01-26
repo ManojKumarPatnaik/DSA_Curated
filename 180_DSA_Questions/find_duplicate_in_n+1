@@ -1,0 +1,33 @@
+Brute Approach:
+1) Sort the array and if i == i+1 return that element
+
+TC - O(nlogN)
+SC - O(1)
+
+Better Approach:
+1) Keep a frequency array and update the count of every element.
+
+TC - O(N)
+SC - O(N)
+
+Optimal Approach: Using slow fast pointers
+
+class Solution{
+    public int findDuplicate(int[] nums) {
+        int slow = nums[0];
+        int fast = nums[0];
+
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while(slow != fast)
+
+        slow = nums[0];
+
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+}

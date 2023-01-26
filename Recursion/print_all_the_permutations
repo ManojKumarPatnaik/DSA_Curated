@@ -1,0 +1,59 @@
+class Solution{
+     public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ds = new ArrayList<Integer>();
+        boolean[] freq = new boolean[nums.length];
+        getPermutation(nums, ans, ds, freq);
+        return ans;
+    }
+
+    public void getPermutation(int[] nums,List<List<Integer>> ans, List<Integer> ds, boolean[] freq){
+        if(ds.size() == nums.length()){
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+        for(int i=0; i<nums.length; i++){
+            if(!freq[i]){
+                freq[i] = true;
+                ds.add(nums[i]);
+                getPermutation(nums,ans,ds,freq);
+                ds.remove(ds.size()-1);
+                freq[i] = false;
+            }
+        }
+    }
+}
+
+
+// Method 2- Without extra map
+class Solution{
+
+    public void getPermutation(int ind, int[] nums, List<List<Integer>> ans){
+        if(ind == nums.length){
+            List<Integer> ds = new ArrayList<>();
+            for(int i=0; i<nums.length; i++){
+                ds.add(nums[i]);
+            }
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for(int i=ind; i<nums.length; i++){
+            swap(i, ind, nums);
+            getPermutation(ind+1,nums,ans);
+            swap(i,ind,nums);
+        }
+    }
+
+    public void swap(int i, int j, int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>(); 
+        getPermutation(0, nums, ans);
+        return ans; 
+    }
+}

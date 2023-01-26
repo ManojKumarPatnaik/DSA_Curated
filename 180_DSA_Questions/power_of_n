@@ -1,0 +1,35 @@
+Brute Force Approach
+1) Loop from 1 to n and multiply x to itself that many times
+2) If n is -ve then do 1/ans (ans found in previous step).
+
+TC - O(N)
+SC - O(1)
+
+Optimal Approach:
+1) While n>0 check if n is even or odd
+2) if n is even do x*x and n/2.
+3) if n is odd do ans*x and n-1
+
+class Solution{
+    public double myPow(double x, int n) {
+        double ans = 1.0;
+        long nn = n;
+
+        if(n < 0) nn = -1*n;
+
+        while(nn > 0){
+            if(nn%2 == 1){
+                ans = ans*x;
+                x = x-1;
+            } else {
+                x = x*x;
+                nn=nn/2;
+            }
+        }
+
+        if(n < 0) ans = (double)(1)/(double)(ans);
+
+        return ans;
+
+    }
+}

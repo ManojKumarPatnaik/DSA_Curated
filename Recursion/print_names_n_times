@@ -1,0 +1,6 @@
+public static void printNames(String s, int count){
+    if(count > 0){
+        System.out.println(s);
+        printNames(s, count-1);
+    }
+}
